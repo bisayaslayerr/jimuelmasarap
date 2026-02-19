@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pindutin mo nalang yung Oo ❤️</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 100px;
+      background-color: #ffe6f0;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background-color: #999;
+      color: white;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>May sasabihin ako... 😳</h1>
+  <p>Crush mo rin ba ako?</p>
+
+  <button class="yes" onclick="sayYes()">Oo ❤️</button>
+  <button class="no" onmouseover="moveButton()">Hinde 😜</button>
+
+  <p id="result"></p>
+
+  <script>
+    function sayYes() {
+      document.getElementById("result").innerHTML = "Yieeee alam ko na eh 😍❤️";
+    }
+
+    function moveButton() {
+      const button = document.querySelector(".no");
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      button.style.left = x + "px";
+      button.style.top = y + "px";
+    }
+  </script>
+
+  <br><br>
+  <small>Created by jimuelmasrap</small>
+
+</body>
+</html>
