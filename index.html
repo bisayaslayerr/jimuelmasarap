@@ -1,67 +1,110 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Pindutin mo nalang yung Oo ❤️</title>
-  <style>
-    body {
-      text-align: center;
-      font-family: Arial, sans-serif;
-      margin-top: 100px;
-      background-color: #ffe6f0;
-    }
+    <title>pag tanga ka tanga ka</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
 
-    h1 {
-      font-size: 28px;
-    }
+        h1 {
+            color: white;
+        }
 
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+        #gameArea {
+            width: 500px;
+            height: 400px;
+            background: white;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
 
-    .yes {
-      background-color: #ff4d6d;
-      color: white;
-    }
+        #box {
+            width: 50px;
+            height: 50px;
+            background: red;
+            position: absolute;
+            cursor: pointer;
+            border-radius: 8px;
+        }
 
-    .no {
-      background-color: #999;
-      color: white;
-      position: absolute;
-    }
-  </style>
+        #score,
+        #time {
+            font-size: 20px;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
 
-  <h1>May sasabihin ako... </h1>
-  <p>Crush mo rin ba ako?</p>
+    <h1>🎮 Click The Moving Box!</h1>
+    <p id="score">Score: 0</p>
+    <p id="time">Time: 30</p>
+    <button onclick="startGame()">Start Game</button>
 
-  <button class="yes" onclick="sayYes()">Oo ❤️</button>
-  <button class="no" onmouseover="moveButton()">Hinde 😜</button>
+    <div id="gameArea">
+        <div id="box"></div>
+    </div>
 
-  <p id="result"></p>
+    <script>
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let timer;
 
-  <script>
-    function sayYes() {
-      document.getElementById("result").innerHTML = "Yieeee alam ko na eh 😍❤️";
-    }
+        const box = document.getElementById("box");
+        const gameArea = document.getElementById("gameArea");
 
-    function moveButton() {
-      const button = document.querySelector(".no");
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      button.style.left = x + "px";
-      button.style.top = y + "px";
-    }
-  </script>
+        function moveBox() {
+            const x = Math.random() * (gameArea.clientWidth - 50);
+            const y = Math.random() * (gameArea.clientHeight - 50);
+            box.style.left = x + "px";
+            box.style.top = y + "px";
+        }
 
-  <br><br>
-  <small>Created by jimuelmasrap</small>
+        box.addEventListener("click", function () {
+            score++;
+            document.getElementById("score").innerText = "Score: " + score;
+            moveBox();
+        });
+
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            document.getElementById("score").innerText = "Score: 0";
+            document.getElementById("time").innerText = "Time: 30";
+
+            moveBox();
+
+            gameInterval = setInterval(moveBox, 1000);
+
+            timer = setInterval(function () {
+                timeLeft--;
+                document.getElementById("time").innerText = "Time: " + timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(gameInterval);
+                    clearInterval(timer);
+                    alert("Game Over! Your score is: " + score);
+                }
+            }, 1000);
+        }
+    </script>
 
 </body>
+
 </html>
